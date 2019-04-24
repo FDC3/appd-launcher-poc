@@ -35,6 +35,11 @@ export enum SendError {
   PlatformError = 'Platform Error'
 }
 
+export enum InteropApiImplementations {
+  Glue42 = 'glue-interop-api-impl',
+  Plexus = '@plexus-interop/common-api-impl',
+}
+
 /**
  * An fdc3Access instance provides an application with access to the FDC3 services provided by one
  * or more platforms.

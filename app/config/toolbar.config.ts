@@ -15,19 +15,37 @@
  * limitations under the License.
  */
 
-// Add FDC3 API Implementation package name
-const FDC3_API_IMPLEMENTATION = '';
+// fdc3-api-v2 implementation package name
+const FDC3_BUS_IMPLEMENTATION = 'com-glue42-finos-fdc3-api-impl';
 
-// Add FINOS Interop API Implementation package name
-const FINOS_INTEROP_API_IMPLEMENTATION = '';
+const glue42PlatformConfig = {
+  application: 'Fdc3.Toolbar',
+  gateway: {
+    protocolVersion: 3,
+    ws: 'ws://127.0.0.1:8385/gw',
+  },
+  auth: {
+    username: process.env.USERNAME,
+    password: '',
+  },
+};
 
-// Add Interop Platforms configs
-const FDC3_API_PLATFORMS: any[] = [];
+// finos-plexus Common Interop API implementation package name - used to open the applications
+const typeGluePlatform = {
+  config: glue42PlatformConfig,
+  type: 'Glue42',
+};
+
+const typeEikonPlatform = {
+  config: glue42PlatformConfig,
+  type: 'Eikon',
+};
+
+const FDC3_IMPL_PLATFORMS = [typeGluePlatform, typeEikonPlatform];
 
 const toolbarConfig = {
-  FDC3_API_IMPLEMENTATION,
-  FINOS_INTEROP_API_IMPLEMENTATION,
-  FDC3_API_PLATFORMS,
+  FDC3_BUS_IMPLEMENTATION,
+  FDC3_IMPL_PLATFORMS,
 };
 
 export default toolbarConfig;

@@ -323,7 +323,7 @@ interface MethodHandler {
 /**
  * Defines a method including the handler that is being registered.
  */
-interface MethodImplementation extends MethodDefinition, MethodHandler {
+export interface MethodImplementation extends MethodDefinition, MethodHandler {
 }
 
 interface StreamHandler {

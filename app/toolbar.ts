@@ -28,12 +28,12 @@ import { Fdc3APIImplementation } from './types/interface';
 
 export class Toolbar {
   public toolbarWindow: BrowserWindow;
-  private toolbarWindowOptions: BrowserWindowConstructorOptions = windowConfig;
+  private toolbarWindowOptions: BrowserWindowConstructorOptions = windowConfig.toolbar;
   private toolbarWindowReady: Promise<void>;
   private providers = new BehaviorSubject<AppProvider[]>([]);
 
-  public start(providers: AppProvider[], fdc3ImplReady?: Promise<Fdc3APIImplementation>) {
-    this.startToolbarWindow();
+  public start(providers: AppProvider[], modalDialogWindow: BrowserWindow, fdc3ImplReady?: Promise<Fdc3APIImplementation>) {
+    this.startToolbarWindow(modalDialogWindow);
     this.addProviders(providers);
     ipcMain.on('get-preload-path', (event: any) => {
         event.returnValue = path.join(__dirname, '../toolbar-ui-angular/preload.js');
@@ -91,13 +91,15 @@ export class Toolbar {
     return this.updateAllProviders(providers);
   }
 
-  private startToolbarWindow() {
+  private startToolbarWindow(modalDialogWindow: BrowserWindow) {
     this.toolbarWindowReady = new Promise((resolve) => {
-      app.on('ready', () => {
-        this.createWindow();
-        resolve();
-        logStream.next(['Electron ready.', 'info', 'Electron']);
-      });
+      // app.on('ready') already fired
+      // app.on('ready', () => {
+      this.createWindow();
+      modalDialogWindow.close();
+      resolve();
+      logStream.next(['Electron ready.', 'info', 'Electron']);
+      // });
 
       app.on('window-all-closed', () => {
         if (process.platform !== 'darwin') {
@@ -122,9 +124,9 @@ export class Toolbar {
       `file://${path.join(__dirname, '..')}/toolbar-ui-angular/dist/toolbar-ui/index.html`
     );
     this.toolbarWindow.on('ready-to-show', () => {
-      this.toolbarWindow.show();
-      console.log(this.toolbarWindow);
-      logStream.next(['Toolbar window ready.', 'info', 'Toolbar']);
+    this.toolbarWindow.show();
+    console.log(this.toolbarWindow);
+    logStream.next(['Toolbar window ready.', 'info', 'Toolbar']);
     });
     this.toolbarWindow.webContents.on('did-finish-load', this.sendProviders.bind(this));
   }

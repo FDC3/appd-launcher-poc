@@ -49,6 +49,22 @@ You will need node.js & npm as well as a globally installed electron (npm i -g e
 
 ## Description
 
+### FINOS Interop API Implementations
+
+On start, a modal dialog will be showed with predefined FINOS Interop API Implementations - Glue42 and Plexus.
+
+Once the user chooses an implementation the Toolbar will be started with it.
+
+#### Add additional FINOS Interop API Implementation
+
+- Add the FINOS Interop API Implementation to the package.json under "optionalDependencies"
+
+- Add a mapping with display name in ./app/types/interface.ts in InteropApiImplementation enum
+
+- Add the display name in ./main.ts in interopApiImplementation array
+
+- Build the project and the newly added FINOS Interop API Implementation will be loaded
+
 ### Application providers
 
 The list Application providers aka (Application Directories) is defined in the Toolbar, using the Settings UI. 

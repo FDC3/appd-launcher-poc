@@ -15,6 +15,22 @@
  * limitations under the License.
  */
 
-const providersConfig: any[] = [];
+const providersConfig: any[] = [
+  {
+    name: 'AppD POC Provider',
+    apiUrl: 'http://localhost:8080/appd/v1',
+    authUrl: 'http://localhost:8080/appd/user/authenticate',
+    email: 'georgi.georgiev@tick42.com',
+    password: 'password',
+  },
+  {
+    name: 'Eikon',
+    apiUrl: 'http://localhost:3001'
+  },
+  {
+    name: 'Glue Desktop',
+    apiUrl: 'http://localhost:3000'
+  }
+];
 
 export default providersConfig;

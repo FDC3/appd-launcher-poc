@@ -103,17 +103,35 @@ export class InitializeService {
     const favAppsIds: string[] = localStorageFavApps ? localStorageFavApps.split(',') : [];
     const initialApps: IApplication[] = [];
     this.internalProviders.forEach((provider: IProvider) => {
+      if (!provider.enabled) {
+        return;
+      }
+      provider.status = 'connected';
+      this.internalApps = initialApps;
+      this.apps.next(this.internalApps);
       provider.getApps()
         .then((apps: IApplication[]) => {
-          apps.forEach((app: IApplication) => {
-            const iconPath: string = this.getAppIconPath(app);
-            const application: IApplication = app;
-            app.provider = provider;
-            app.iconPath = iconPath;
-            app.showApp = provider.enabled;
-            app.isFavourite = favAppsIds.indexOf(app.appId) >= 0 && provider.enabled;
-            initialApps.push(application);
-          });
+          apps
+            .filter((app: IApplication) => {
+              if (provider.name === 'AppD POC Provider') {
+                const showInToolbar: { name: string, value: string } = app.customConfig
+                  .find((config) => config.name === 'showInToolbar');
+                if (showInToolbar && showInToolbar.value === 'true') {
+                  return app;
+                }
+              } else {
+                return app;
+              }
+            })
+            .forEach((app: IApplication) => {
+              const iconPath: string = this.getAppIconPath(app);
+              const application: IApplication = app;
+              app.provider = provider;
+              app.iconPath = iconPath;
+              app.showApp = provider.enabled;
+              app.isFavourite = favAppsIds.indexOf(app.appId) >= 0 && provider.enabled;
+              initialApps.push(application);
+            });
           provider.status = 'connected';
           this.internalApps = initialApps;
           this.apps.next(this.internalApps);
@@ -145,8 +163,7 @@ export class InitializeService {
   private subscribeForGlue42DemoToolbarProviders(): void {
     (window as any).glue42DemoToolbar.providers.subscribe((providers: IProvider[]) => {
       providers = providers.map((provider: IProvider) => {
-        this.addLogOnProviderAdded(provider);
-        provider.enabled = true;
+        provider.enabled = false;
         provider.status = 'connecting';
         return provider;
       });
@@ -154,15 +171,6 @@ export class InitializeService {
       this.providers.next(this.internalProviders);
       this.setApps();
     });
-  }
-
-  /**
-   * Add log on provider added
-   * @param provider: provider
-   */
-  private addLogOnProviderAdded(provider: IProvider): void {
-    const logMessage: string = `Will add provider "${provider.name}" with URL ${provider.apiUrl}`;
-    this.helperService.addLog(Date.now(), 'INFO', 'Toolbar', logMessage);
   }
 
   /**

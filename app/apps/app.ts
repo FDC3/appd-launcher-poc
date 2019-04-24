@@ -87,10 +87,16 @@ export default class App implements AppAPI {
         this.handleOrgFinosFdc3Demo(manifestJSON);
         break;
 
-      default:
+      case 'org.finos.fdc3.demo.host':
 
         await this.handleOrgFinosFdc3DemoHost(manifestJSON);
         break;
+
+      default:
+        errorMsg = `Failed to open application "${this.title || this.name}". Unsupported manifest type "${this.manifestType}".`;
+
+        logStream.next([errorMsg, 'error', 'Toolbar']);
+        throw new Error(errorMsg);
     }
   }
 

@@ -18,7 +18,18 @@
 import * as path from 'path';
 import { BrowserWindowConstructorOptions } from 'electron';
 
-const windowConfig: BrowserWindowConstructorOptions = {
+const modalDialogWindowConfig: BrowserWindowConstructorOptions = {
+  show: false,
+  webPreferences: {
+    preload: path.join(__dirname, '..', 'preload.js')
+  },
+  height: 170,
+  width: 780,
+  minHeight: 170,
+  minWidth: 780
+};
+
+const toolbarWindowConfig: BrowserWindowConstructorOptions = {
   show: false,
   webPreferences: {
     preload: path.join(__dirname, '..', 'preload.js')
@@ -29,4 +40,7 @@ const windowConfig: BrowserWindowConstructorOptions = {
   minWidth: 500
 };
 
-export default windowConfig;
+export default {
+  modalDialog: modalDialogWindowConfig,
+  toolbar: toolbarWindowConfig
+};
