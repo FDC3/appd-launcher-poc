@@ -21,7 +21,8 @@ import { BrowserWindowConstructorOptions } from 'electron';
 const windowConfig: BrowserWindowConstructorOptions = {
   show: false,
   webPreferences: {
-    preload: path.join(__dirname, '..', 'preload.js')
+    preload: path.join(__dirname, '..', 'preload.js'),
+    nodeIntegration: true
   },
   height: 100,
   width: 800,
