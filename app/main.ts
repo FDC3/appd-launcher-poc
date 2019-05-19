@@ -38,7 +38,7 @@ let fdc3ImplReady: Promise<Fdc3APIImplementation>;
 try {
   InteropPlatform = require(toolbarConfig.FINOS_INTEROP_API_IMPLEMENTATION);
 } catch (error) {
-  logStream.next([`Failed to load ${toolbarConfig.FINOS_INTEROP_API_IMPLEMENTATION} implementation.`, 'error', 'Toolbar']);
+  logStream.next([`Failed to load ${toolbarConfig.FINOS_INTEROP_API_IMPLEMENTATION || 'FINOS Interop'} implementation.`, 'error', 'Toolbar']);
 }
 
 const interopPlatforms: InteropPlatformAPI[] = []; // https://github.com/finos-plexus/finos-plexus.github.io
@@ -52,7 +52,7 @@ try {
   fdc3Impl = require(toolbarConfig.FDC3_API_IMPLEMENTATION);
   fdc3ImplReady = fdc3Impl(interopPlatforms);
 } catch (error) {
-  logStream.next([`Failed to load ${toolbarConfig.FDC3_API_IMPLEMENTATION} implementation.`, 'error', 'Toolbar']);
+  logStream.next([`Failed to load ${toolbarConfig.FDC3_API_IMPLEMENTATION || 'FDC3 API'} implementation.`, 'error', 'Toolbar']);
 }
 
 const glue42DemoToolbar = new Toolbar();

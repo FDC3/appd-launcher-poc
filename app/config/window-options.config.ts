@@ -24,6 +24,8 @@ const windowConfig: BrowserWindowConstructorOptions = {
     preload: path.join(__dirname, '..', 'preload.js'),
     nodeIntegration: true
   },
+  x: 200,
+  y: 200,
   height: 100,
   width: 800,
   minHeight: 100,
