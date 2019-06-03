@@ -17,5 +17,11 @@
 
 import { remote } from 'electron';
 
+/**
+ * By saving these variables to the window object, the Toolbar Window is able to call methods and subscribe for events
+ * in the Electron app.
+ * glue42DemoToolbar allows to subscribe for providers and to call methods related to the providers
+ * logStream allows to subscribe for log stream and to push new logs
+ */
 (window as any).glue42DemoToolbar = remote.getGlobal('glue42DemoToolbar');
 (window as any).logStream = remote.getGlobal('logStream');

@@ -68,4 +68,4 @@ Support for starting application of manifestType `org.finos.fdc3.demo.host` is s
 
 ##### Other manifest types
 
-The Toolbar can easily be extended to support more manifest types, by extendinf the code in ```app/apps/app.ts```.
+The Toolbar can easily be extended to support more manifest types, by extending the code in ```app/apps/app.ts```.
