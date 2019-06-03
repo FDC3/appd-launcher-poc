@@ -78,12 +78,12 @@ describe('List Of Apps Component', () => {
       component.showAppConfig(app);
       expect(component.currentAppId).toEqual(app.appId);
       expect(component.appJSONConfigTitle).toEqual(`"${app.title}" JSON Config`);
-      const tick42App: IFdc3LauncherToolbarApplication = Object.assign({}, app);
-      tick42App.manifest = JSON.parse(tick42App.manifest as string);
-      delete (tick42App as IApplication).iconPath;
-      delete (tick42App as IApplication).showApp;
-      delete (tick42App as IApplication).isFavourite;
-      expect(component.appJSONConfig).toEqual(JSON.stringify(tick42App, null, 2));
+      const fdc3ToolbarApp: IFdc3LauncherToolbarApplication = Object.assign({}, app);
+      fdc3ToolbarApp.manifest = JSON.parse(fdc3ToolbarApp.manifest as string);
+      delete (fdc3ToolbarApp as IApplication).iconPath;
+      delete (fdc3ToolbarApp as IApplication).showApp;
+      delete (fdc3ToolbarApp as IApplication).isFavourite;
+      expect(component.appJSONConfig).toEqual(JSON.stringify(fdc3ToolbarApp, null, 2));
     });
   }));
 

@@ -123,9 +123,9 @@ export class ListOfAppsComponent implements OnInit, OnDestroy {
    * @returns string: the app JSON config
    */
   private getAppJSONConfig(app: IApplication): string {
-    const tick42App: IFdc3LauncherToolbarApplication = this.helperService.getFdc3LauncherToolbarApp(app);
-    tick42App.manifest = JSON.parse(tick42App.manifest as string);
-    return JSON.stringify(tick42App, null, 2);
+    const fdc3ToolbarApp: IFdc3LauncherToolbarApplication = this.helperService.getFdc3LauncherToolbarApp(app);
+    fdc3ToolbarApp.manifest = JSON.parse(fdc3ToolbarApp.manifest as string);
+    return JSON.stringify(fdc3ToolbarApp, null, 2);
   }
 
   /**

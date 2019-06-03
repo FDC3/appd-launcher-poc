@@ -136,7 +136,7 @@ export class InitializeService {
   }
 
   /**
-   * Subscribe for Glue42 demo toolbar providers
+   * Subscribe for FDC3 Launcher Toolbar providers
    * Add the following props:
    * enabled - set to true by default
    * status - set to 'connecting' by default

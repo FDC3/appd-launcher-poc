@@ -69,16 +69,16 @@ export class HelperService {
   }
 
   /**
-   * Get Glue42 toolbar app
+   * Get Fdc3 Launcher Toolbar app
    * Converts the modified app into the originally received app from fdc3LauncherToolbar providers
    * @param app: modified app
    * @returns IFdc3LauncherToolbarApplication: fdc3LauncherToolbar app
    */
   public getFdc3LauncherToolbarApp(app: IApplication): IFdc3LauncherToolbarApplication {
-    const glue42ToolbarApp: IApplication | IFdc3LauncherToolbarApplication = Object.assign({}, app);
-    delete (glue42ToolbarApp as IApplication).iconPath;
-    delete (glue42ToolbarApp as IApplication).showApp;
-    delete (glue42ToolbarApp as IApplication).isFavourite;
-    return glue42ToolbarApp;
+    const fdc3ToolbarApp: IApplication | IFdc3LauncherToolbarApplication = Object.assign({}, app);
+    delete (fdc3ToolbarApp as IApplication).iconPath;
+    delete (fdc3ToolbarApp as IApplication).showApp;
+    delete (fdc3ToolbarApp as IApplication).isFavourite;
+    return fdc3ToolbarApp;
   }
 }

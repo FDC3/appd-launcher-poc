@@ -67,14 +67,14 @@ describe('Helper Service', () => {
     });
   });
 
-  it('Should convert apps to Tick42Apps', fakeAsync(() => {
+  it('Should convert apps to Fdc3LauncherToolbarApps', fakeAsync(() => {
     initializeService.init();
     tick();
     initializeService.apps.subscribe((apps: IApplication[]) => {
-      const tick42App = service.getFdc3LauncherToolbarApp(apps[0]);
-      expect((tick42App as IApplication).iconPath).toBeUndefined();
-      expect((tick42App as IApplication).showApp).toBeUndefined();
-      expect((tick42App as IApplication).isFavourite).toBeUndefined();
+      const fdc3ToolbarApp = service.getFdc3LauncherToolbarApp(apps[0]);
+      expect((fdc3ToolbarApp as IApplication).iconPath).toBeUndefined();
+      expect((fdc3ToolbarApp as IApplication).showApp).toBeUndefined();
+      expect((fdc3ToolbarApp as IApplication).isFavourite).toBeUndefined();
     });
   }));
 });

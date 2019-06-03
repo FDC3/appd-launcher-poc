@@ -1,4 +1,4 @@
-# Glue42 FINOS FDC3 AppD demo toolbar
+# FINOS FDC3 AppD demo toolbar
 
 ## Overview
 
