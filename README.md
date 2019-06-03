@@ -18,34 +18,21 @@ You will need node.js & npm as well as a globally installed electron (npm i -g e
 
 ### Steps to run project
 
-- run build-ui.bat
-- run build-app.bat
-- run start.bat
-
-### Steps to run project manually
-
 - Clone the project
 
-#### Build UI
+#### Build Toolbar Window (UI)
 
 - ```cd``` to <project's root dir>/toolbar-ui-angular
-- ```npm i```
 - ```npm run build```
 
-#### Install dependencies
+#### Build Electron app
 
-- ```cd``` to the project's root dir
-- ```npm i```
-
-#### Run dev version
-
+- ```cd``` to <project's root dir>
 - ```npm run build```
-- ```electron app-js/main.js```
 
-#### Run prod version
+#### Run Toolbar
 
-- ```npm run package:all```
-- Inside the release-builds folder locate the built version for your OS
+- ```npm run start```
 
 ## Description
 

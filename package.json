@@ -5,7 +5,8 @@
   "description": "A simple toolbar that can display and launch applications",
   "main": "app-js/main.js",
   "scripts": {
-    "build": "npm run tslint && tsc",
+    "build": "npm i && npm run tslint && tsc",
+    "start": "electron app-js/main.js",
     "tslint": "node_modules/.bin/tslint ./app/**/*.ts",
     "package:win": "electron-packager . finos-fdc3-appd-toolbar --overwrite --platform=win32 --arch=all --icon=resources/icons/fdc3.png.ico --prune=true --out=release-builds --version-string.ProductName=\"FINOS FDC3 AppD Toolbar\"",
     "package:all": "electron-packager . finos-fdc3-appd-toolbar --overwrite --platform=all --arch=all --icon=resources/icons/fdc3.png.ico --prune=true --out=release-builds --version-string.ProductName=\"FINOS FDC3 AppD Toolbar\""
