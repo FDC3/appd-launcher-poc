@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { ReplaySubject } from '../node_modules/rxjs';
+import { ReplaySubject } from 'rxjs';
 
 const logStream = new ReplaySubject();
 

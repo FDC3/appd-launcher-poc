@@ -116,7 +116,7 @@ export class Toolbar {
 
   private createWindow() {
     this.toolbarWindow = new BrowserWindow(this.toolbarWindowOptions);
-    this.toolbarWindow.setTitle('Tick42 Toolbar');
+    this.toolbarWindow.setTitle('FDC3 Demo Toolbar');
     this.toolbarWindow.setMenuBarVisibility(false);
     this.toolbarWindow.loadURL(
       `file://${path.join(__dirname, '..')}/toolbar-ui-angular/dist/toolbar-ui/index.html`

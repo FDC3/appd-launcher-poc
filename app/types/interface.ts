@@ -15,6 +15,8 @@
  * limitations under the License.
  */
 
+type Context = object;
+
 export enum OpenError {
   AppNotFound = 'AppNotFound',
   ErrorOnLaunch = 'ErrorOnLaunch',
@@ -28,33 +30,60 @@ export enum ResolveError {
   ResolverTimeout = 'ResolverTimeout'
 }
 
-export enum SendError {
-  SendOK = 'OK',
-  UnknownPlatform = 'Invalid Platform',
-  PlatformNotConnected = 'Platform Not connected',
-  PlatformError = 'Platform Error'
+/**
+ * Intent descriptor
+ */
+interface IntentMetadata {
+  name: string;
+  displayName: string;
 }
 
 /**
- * An fdc3Access instance provides an application with access to the FDC3 services provided by one
- * or more platforms.
- * Usage Note. For applications running on a Platform, the Platform may provide a preinitialized
- * fdc3Access instance. Applications may also instantiate their own instances which connect directly
- * to the Platforms.
+ * An interface that relates an intent to apps
+ */
+interface AppIntent {
+  intent: IntentMetadata;
+  apps: AppMetadata[];
+}
+
+/**
+ * App metadata is Desktop Agent specific - but should support a name property.
+ */
+interface AppMetadata {
+  name: string;
+}
+
+/**
+ * IntentResolution provides a standard format for data returned upon resolving an intent.
+ * ```javascript
+ * //resolve a "Chain" type intent
+ * var intentR = await agent.raiseIntent("intentName", context);
+ * //resolve a "Client-Service" type intent with data response
+ * var intentR = await agent.raiseIntent("intentName", context);
+ * var dataR = intentR.data;
+ * ```
+ */
+interface IntentResolution {
+  source: string;
+  data?: object;
+  version: string;
+}
+
+interface Listener {
+  /**
+   * Unsubscribe the listener object.
+   */
+  unsubscribe(): Promise<void>;
+}
+
+/**
+ * A Desktop Agent is a desktop component (or aggregate of components) that serves as a
+ * launcher and message router (broker) for applications in its domain.
  *
- * The current FDC3 services available via fdc3Access are:
- *   - Application management, which covers launching and activating applications. It is expected that the
- * applications available will have been read from one or more App Directory services but this is NOT a requirement.
- * NB Should we include the enumerate apps here or leave that to the AppD REST API (my vote).
- *   - Intents, listing Intents and firing them.
- *   - Contexts, broadcasting 'current context' to interested applications.
- *
- * The definitions of Applications, Intents and Contexts follow the proposals from the various FDC3 Working groups.
- * At some point in the future this interface can reference approved and (versioned) definitions from the WGs.
- * In this iteration, the appropriate definitions have been copied in here to enable this to be a self contained
- * proposal.
- *
- * Usage Note: Identity and Security are key issues to be addressed in a future iteration.
+ * A Desktop Agent can be connected to one or more App Directories and will use directories for application
+ * identity and discovery. Typically, a Desktop Agent will contain the proprietary logic of
+ * a given platform, handling functionality like explicit application interop workflows where
+ * security, consistency, and implementation requirements are proprietary.
  */
 export interface Fdc3APIImplementation {
   /**
@@ -110,7 +139,7 @@ export interface Fdc3APIImplementation {
    *
    * ```javascript
    * // I have a context object, and I want to know what I can do with it, hence, I look for for intents...
-   * const appIntents = await agent.findIntentsForContext(context);
+   * const appIntents = await agent.findIntentsByContext(context);
    *
    * // returns for example:
    * // [{
@@ -162,89 +191,4 @@ export interface Fdc3APIImplementation {
    * Adds a listener for incoming context broadcast from the Desktop Agent.
    */
   addContextListener(handler: (context: Context) => void): Listener;
-}
-
-/**
- * An interface that relates an intent to apps
- */
-interface AppIntent {
-  intent: IntentMetadata;
-  apps: AppMetadata[];
-}
-
-/**
- * Intent descriptor
- */
-interface IntentMetadata {
-  name: string;
-  displayName: string;
-}
-
-/**
- * App metadata is Desktop Agent specific - but should support a name property.
- */
-interface AppMetadata {
-  name: string;
-}
-
-/**
- * IntentResolution provides a standard format for data returned upon resolving an intent.
- * ```javascript
- * //resolve a "Chain" type intent
- * var intentR = await agent.raiseIntent("intentName", context);
- * //resolve a "Client-Service" type intent with data response
- * var intentR = await agent.raiseIntent("intentName", context);
- * var dataR = intentR.data;
- * ```
- */
-interface IntentResolution {
-  source: string;
-  data?: object;
-  version: string;
-}
-
-/**
- * An FDC3 Application.
- * UsageNote: Typically FDC3 applications are defined in an Application Directory and started via FDC3
- * However applications can also be started 'outside' FDC3 and announce themselves.
- */
-export interface Application {
-  appId: string;  // FDC App D unique id. or missing if empty or null then this is not an App Directory defined application
-  name?: string;  // App name
-  platformName: string;  // If the application runs on a Platform, the name of the Platform.
-  appType?: string; // FDC3 AppD application type.
-}
-
-export interface Listener {
-  /**
-   * Unsubscribe the listener object.
-   */
-  unsubscribe(): Promise<void>;
-}
-
-/**
- * A context consists of one or more data items.
- * A data item e.g, an instrument or a client could be described using multiple formats.
- * TODO: Do all items need to be of the same type
- */
-export interface Context {
-  items: ContextItem[];
-}
-
-/**
- * A single context data item.
- * NB A data items may be presented using multiple formats.
- */
-export interface ContextItem {
-  itemFormat: ContextItemFormat[];  // The data items
-
-  /**
-   * Return a  comma separated list of all the formats used to define this data item.
-   */
-  getFormats(): string;
-}
-
-export interface ContextItemFormat {
-  format: string; // The name of the format using FDC3 Context WG format == type.
-  data: object;   // The item data in the given format.
 }
