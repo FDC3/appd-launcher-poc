@@ -44,7 +44,7 @@ Application provider details are held in local storage.
 
 #### <a name="appd-poc-provider"></a> AppD PoC provider
 
-In order to use the Glue42 FINOS FDC3 App Directroy toolbar, you need to have AppD services to connect to. If you do not have access to services, you can run your own instances using the [appd-poc](https://github.com/FDC3/appd-poc), a Java server. Steps to run:
+In order to use the FDC3 Demo Toolbar, you need to have AppD services to connect to. If you do not have access to services, you can run your own instances using the [appd-poc](https://github.com/FDC3/appd-poc), a Java server. Steps to run:
 
 - Clone the project
 
