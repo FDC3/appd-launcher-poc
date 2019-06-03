@@ -16,10 +16,10 @@
  */
 
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, Subject} from 'rxjs/index';
+import {BehaviorSubject, Subject} from 'rxjs/index';
 import {ElectronService} from 'ngx-electron';
 
-import {IApplication, IApplicationManifest, ILog, IProvider, IGlue42ToolbarApplication} from '../app';
+import {IApplication, ILog, IProvider, IFdc3LauncherToolbarApplication} from '../app';
 
 @Injectable()
 export class HelperService {
@@ -70,12 +70,12 @@ export class HelperService {
 
   /**
    * Get Glue42 toolbar app
-   * Converts the modified app into the originally received app from glue42DemoToolbar providers
+   * Converts the modified app into the originally received app from fdc3LauncherToolbar providers
    * @param app: modified app
-   * @returns IGlue42ToolbarApplication: glue42DemoToolbar app
+   * @returns IFdc3LauncherToolbarApplication: fdc3LauncherToolbar app
    */
-  public getGlue42ToolbarApp(app: IApplication): IGlue42ToolbarApplication {
-    const glue42ToolbarApp: IApplication | IGlue42ToolbarApplication = Object.assign({}, app);
+  public getFdc3LauncherToolbarApp(app: IApplication): IFdc3LauncherToolbarApplication {
+    const glue42ToolbarApp: IApplication | IFdc3LauncherToolbarApplication = Object.assign({}, app);
     delete (glue42ToolbarApp as IApplication).iconPath;
     delete (glue42ToolbarApp as IApplication).showApp;
     delete (glue42ToolbarApp as IApplication).isFavourite;

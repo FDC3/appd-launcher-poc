@@ -108,7 +108,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
    * Delete provider
    */
   public deleteProvider(): void {
-    (window as any).glue42DemoToolbar.deleteProvider(this.currentProvider);
+    (window as any).fdc3LauncherToolbar.deleteProvider(this.currentProvider);
     this.deleteProviderModalDialog.hide();
   }
 

@@ -17,5 +17,5 @@
 
 const remote = require('electron').remote;
 
-window.glue42DemoToolbar = remote.getGlobal('glue42DemoToolbar');
+window.fdc3LauncherToolbar = remote.getGlobal('fdc3LauncherToolbar');
 window.logStream = remote.getGlobal('logStream');

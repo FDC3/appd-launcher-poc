@@ -27,7 +27,7 @@ import {ElectronService} from 'ngx-electron';
 import {InitializeService} from '../services/initialize.service';
 import {HelperService} from '../services/helper.service';
 
-import {IApplication, IGlue42ToolbarApplication} from '../app';
+import {IApplication, IFdc3LauncherToolbarApplication} from '../app';
 
 describe('List Of Apps Component', () => {
   let component: ListOfAppsComponent;
@@ -78,7 +78,7 @@ describe('List Of Apps Component', () => {
       component.showAppConfig(app);
       expect(component.currentAppId).toEqual(app.appId);
       expect(component.appJSONConfigTitle).toEqual(`"${app.title}" JSON Config`);
-      const tick42App: IGlue42ToolbarApplication = Object.assign({}, app);
+      const tick42App: IFdc3LauncherToolbarApplication = Object.assign({}, app);
       tick42App.manifest = JSON.parse(tick42App.manifest as string);
       delete (tick42App as IApplication).iconPath;
       delete (tick42App as IApplication).showApp;

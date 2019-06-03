@@ -55,7 +55,7 @@ try {
   logStream.next([`Failed to load ${toolbarConfig.FDC3_API_IMPLEMENTATION || 'FDC3 API'} implementation.`, 'error', 'Toolbar']);
 }
 
-const glue42DemoToolbar = new Toolbar();
-glue42DemoToolbar.start(appProviders, fdc3ImplReady);
-(global as any).glue42DemoToolbar = glue42DemoToolbar;
+const fdc3LauncherToolbar = new Toolbar();
+fdc3LauncherToolbar.start(appProviders, fdc3ImplReady);
+(global as any).fdc3LauncherToolbar = fdc3LauncherToolbar;
 (global as any).logStream = logStream;

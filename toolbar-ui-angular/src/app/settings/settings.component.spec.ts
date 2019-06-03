@@ -112,9 +112,9 @@ describe('Settings Component', () => {
   }));
 
   it('Should delete provider', () => {
-    spyOn((window as any).glue42DemoToolbar, 'deleteProvider');
+    spyOn((window as any).fdc3LauncherToolbar, 'deleteProvider');
     component.deleteProvider();
-    expect((window as any).glue42DemoToolbar.deleteProvider).toHaveBeenCalled();
+    expect((window as any).fdc3LauncherToolbar.deleteProvider).toHaveBeenCalled();
     expect(component.deleteProviderModalDialog.hide).toHaveBeenCalled();
   });
 });

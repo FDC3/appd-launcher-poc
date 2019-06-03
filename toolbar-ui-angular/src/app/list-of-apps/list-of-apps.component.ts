@@ -26,7 +26,7 @@ import {HelperService} from '../services/helper.service';
 
 import {ModalDialogComponent} from '../shared/modal-dialog/modal-dialog.component';
 
-import {IApplication, IGlue42ToolbarApplication} from '../app';
+import {IApplication, IFdc3LauncherToolbarApplication} from '../app';
 
 @Component({
   selector: 'app-list-of-apps',
@@ -123,7 +123,7 @@ export class ListOfAppsComponent implements OnInit, OnDestroy {
    * @returns string: the app JSON config
    */
   private getAppJSONConfig(app: IApplication): string {
-    const tick42App: IGlue42ToolbarApplication = this.helperService.getGlue42ToolbarApp(app);
+    const tick42App: IFdc3LauncherToolbarApplication = this.helperService.getFdc3LauncherToolbarApp(app);
     tick42App.manifest = JSON.parse(tick42App.manifest as string);
     return JSON.stringify(tick42App, null, 2);
   }

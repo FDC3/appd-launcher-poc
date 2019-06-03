@@ -23,22 +23,22 @@ import {of} from 'rxjs';
 import {AppComponent} from './app.component';
 import {InitializeService} from './services/initialize.service';
 import {HelperService} from './services/helper.service';
-import {IGlue42ToolbarProvider, IApplication} from './app';
+import {IFdc3LauncherToolbarProvider, IApplication} from './app';
 
 const applications: IApplication[] = require('../mock-data/apps.json');
-const providers: IGlue42ToolbarProvider[] = require('../mock-data/providers.json');
+const providers: IFdc3LauncherToolbarProvider[] = require('../mock-data/providers.json');
 
 describe('App Component', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let initializeService: InitializeService;
 
-  const mockProviders: IGlue42ToolbarProvider[] = providers.map((provider: IGlue42ToolbarProvider) => {
+  const mockProviders: IFdc3LauncherToolbarProvider[] = providers.map((provider: IFdc3LauncherToolbarProvider) => {
     provider.getApps = () => new Promise((resolve) =>
       resolve(applications.filter((app: IApplication) => app.provider.name === provider.name)));
     return provider;
   });
-  (window as any).glue42DemoToolbar = {
+  (window as any).fdc3LauncherToolbar = {
     addProvider: () => {},
     updateProvider: () => {},
     deleteProvider: () => {},

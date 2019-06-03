@@ -33,7 +33,7 @@ export class InitializeService {
   }
 
   public init(): void {
-    this.subscribeForGlue42DemoToolbarProviders();
+    this.subscribeForFdc3LauncherToolbarProviders();
     this.subscribeForLogStream();
   }
 
@@ -142,8 +142,8 @@ export class InitializeService {
    * status - set to 'connecting' by default
    * Set apps after updating the providers
    */
-  private subscribeForGlue42DemoToolbarProviders(): void {
-    (window as any).glue42DemoToolbar.providers.subscribe((providers: IProvider[]) => {
+  private subscribeForFdc3LauncherToolbarProviders(): void {
+    (window as any).fdc3LauncherToolbar.providers.subscribe((providers: IProvider[]) => {
       providers = providers.map((provider: IProvider) => {
         this.addLogOnProviderAdded(provider);
         provider.enabled = true;

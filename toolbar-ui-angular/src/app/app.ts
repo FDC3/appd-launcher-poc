@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-export interface IGlue42ToolbarApplication {
+export interface IFdc3LauncherToolbarApplication {
   appId: string;
   name: string;
   version: string;
@@ -34,7 +34,7 @@ export interface IGlue42ToolbarApplication {
   start: () => any;
 }
 
-export interface IApplication extends IGlue42ToolbarApplication {
+export interface IApplication extends IFdc3LauncherToolbarApplication {
   provider: IProvider;
   iconPath: string;
   showApp: boolean;
@@ -48,7 +48,7 @@ export interface IApplicationManifest {
   url?: string;
 }
 
-export interface IGlue42ToolbarProvider {
+export interface IFdc3LauncherToolbarProvider {
   name: string;
   apiUrl: string;
   email: string;
@@ -57,7 +57,7 @@ export interface IGlue42ToolbarProvider {
   getApps?: () => any;
 }
 
-export interface IProvider extends IGlue42ToolbarProvider {
+export interface IProvider extends IFdc3LauncherToolbarProvider {
   enabled: boolean;
   status: string;
 }

@@ -23,7 +23,7 @@ import {ModalDialogComponent} from '../../shared/modal-dialog/modal-dialog.compo
 import {HelperService} from '../../services/helper.service';
 import {InitializeService} from '../../services/initialize.service';
 
-import {IProvider, IGlue42ToolbarProvider} from '../../app';
+import {IProvider, IFdc3LauncherToolbarProvider} from '../../app';
 
 @Component({
   selector: 'app-directory-form-modal',
@@ -148,14 +148,14 @@ export class AppDirectoryFormModalComponent implements OnInit, OnDestroy {
    */
   public createAppDirectory(): void {
     (window as any).logStream.next([`Created new app provider "${this._name}"`, 'INFO', 'Angular']);
-    const providerData: IGlue42ToolbarProvider = {
+    const providerData: IFdc3LauncherToolbarProvider = {
       name: this._name,
       apiUrl: this._apiURL,
       authUrl: this._authURL,
       email: this._email,
       password: this._password
     };
-    (window as any).glue42DemoToolbar.addProvider(providerData);
+    (window as any).fdc3LauncherToolbar.addProvider(providerData);
     this.newAppDirectoryModalDialog.hide();
   }
 
@@ -164,7 +164,7 @@ export class AppDirectoryFormModalComponent implements OnInit, OnDestroy {
    */
   public editAppDirectory(): void {
     (window as any).logStream.next([`Edited app directory "${this._name}"`, 'INFO', 'Angular']);
-    const providerData: IGlue42ToolbarProvider = {
+    const providerData: IFdc3LauncherToolbarProvider = {
       name: this._name,
       apiUrl: this._apiURL,
       authUrl: this._authURL,
@@ -173,7 +173,7 @@ export class AppDirectoryFormModalComponent implements OnInit, OnDestroy {
     };
     const editedProvider: IProvider = this.providers
       .filter((provider: IProvider) => provider.name === this.editedProviderName)[0];
-    (window as any).glue42DemoToolbar.updateProvider(editedProvider, providerData);
+    (window as any).fdc3LauncherToolbar.updateProvider(editedProvider, providerData);
     this.newAppDirectoryModalDialog.hide();
   }
 

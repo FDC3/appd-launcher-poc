@@ -71,7 +71,7 @@ describe('Helper Service', () => {
     initializeService.init();
     tick();
     initializeService.apps.subscribe((apps: IApplication[]) => {
-      const tick42App = service.getGlue42ToolbarApp(apps[0]);
+      const tick42App = service.getFdc3LauncherToolbarApp(apps[0]);
       expect((tick42App as IApplication).iconPath).toBeUndefined();
       expect((tick42App as IApplication).showApp).toBeUndefined();
       expect((tick42App as IApplication).isFavourite).toBeUndefined();

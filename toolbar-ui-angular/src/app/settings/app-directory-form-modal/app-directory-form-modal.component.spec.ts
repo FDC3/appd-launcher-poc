@@ -27,7 +27,7 @@ import {ModalDialogComponent} from '../../shared/modal-dialog/modal-dialog.compo
 import {HelperService} from '../../services/helper.service';
 import {InitializeService} from '../../services/initialize.service';
 
-import {IProvider, IGlue42ToolbarProvider} from '../../app';
+import {IProvider, IFdc3LauncherToolbarProvider} from '../../app';
 
 describe('App Directory Form Modal Component', () => {
   let component: AppDirectoryFormModalComponent;
@@ -255,23 +255,23 @@ describe('App Directory Form Modal Component', () => {
   }));
 
   it('Should create app directory', () => {
-    spyOn((window as any).glue42DemoToolbar, 'addProvider');
+    spyOn((window as any).fdc3LauncherToolbar, 'addProvider');
     component.name = 'test';
     component.apiURL = 'http://localhost:9875';
     component.createAppDirectory();
-    const providerData: IGlue42ToolbarProvider = {
+    const providerData: IFdc3LauncherToolbarProvider = {
       name: component.name,
       apiUrl: component.apiURL,
       authUrl: component.authURL,
       email: component.email,
       password: component.password
     };
-    expect((window as any).glue42DemoToolbar.addProvider).toHaveBeenCalledWith(providerData);
+    expect((window as any).fdc3LauncherToolbar.addProvider).toHaveBeenCalledWith(providerData);
     expect(component.newAppDirectoryModalDialog.hide).toHaveBeenCalled();
   });
 
   it('Should edit app directory', fakeAsync(() => {
-    spyOn((window as any).glue42DemoToolbar, 'updateProvider');
+    spyOn((window as any).fdc3LauncherToolbar, 'updateProvider');
     component.name = 'test';
     component.apiURL = 'http://localhost:9875';
     initializeService.init();
@@ -279,7 +279,7 @@ describe('App Directory Form Modal Component', () => {
     initializeService.providers.subscribe(() => {
       const editedProvider: IProvider = component.providers[0];
       component.editedProviderName = editedProvider.name;
-      const providerData: IGlue42ToolbarProvider = {
+      const providerData: IFdc3LauncherToolbarProvider = {
         name: component.name,
         apiUrl: component.apiURL,
         authUrl: component.authURL,
@@ -287,7 +287,7 @@ describe('App Directory Form Modal Component', () => {
         password: component.password
       };
       component.editAppDirectory();
-      expect((window as any).glue42DemoToolbar.updateProvider).toHaveBeenCalledWith(editedProvider, providerData);
+      expect((window as any).fdc3LauncherToolbar.updateProvider).toHaveBeenCalledWith(editedProvider, providerData);
       expect(component.newAppDirectoryModalDialog.hide).toHaveBeenCalled();
     });
   }));

@@ -66,7 +66,7 @@ export class AppConfigComponent implements OnInit, OnDestroy {
       this.app = this.getApp(apps, appId);
       if (this.app) {
         this.zone.run(() => {
-          this.appJSONConfig = JSON.stringify(this.helperService.getGlue42ToolbarApp(this.app), null, 2);
+          this.appJSONConfig = JSON.stringify(this.helperService.getFdc3LauncherToolbarApp(this.app), null, 2);
         });
       }
     }));

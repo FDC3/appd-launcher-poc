@@ -35,7 +35,7 @@ limitations under the License. -->
   <script>
     window.onload = function () {
       const appId = window.location.hash.substr(1);
-      window.glue42DemoToolbar.providers.subscribe((providers) => {
+      window.fdc3LauncherToolbar.providers.subscribe((providers) => {
         providers.forEach((provider) => {
           provider.getApps()
             .then((apps) => {
