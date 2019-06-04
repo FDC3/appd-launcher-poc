@@ -22,7 +22,7 @@ The list of app providers can be managed using the Toolbar settings UI.
 
 The FINOS FDC3 Application Directory API defines applications, certain key attributes of each application are provided in common fields, including information on any Intents supported by the application. However the launch details of each application are defined in the application manifest, the manifest is either proviuded as a string, or a URL to the manifest definition. 
 
-FINOS FDC3 does not define any manifest types, and the dettypes are expected to vary between FDC3 implementations. As an example of how manifest types could be used, the Toolbar projects defines two manifest types
+FINOS FDC3 does not define any manifest types, and the types are expected to vary between FDC3 implementations. As an example of how manifest types could be used, the Toolbar projects defines two manifest types
 * [org.finos.fdc3.demo](./app/apps/schemas/org.finos.fdc3.demo-manifest-schema.json)
 Which is used to define Desktop Exe and Desktop Browser applications. These applications can be started by the Toolbar using the Electron native services.
 * [org.finos.fdc3.demo.host](./app/apps/schemas/org.finos.fdc3.demo.host-manifest-schema.json) Which defines an FDC3 application i.e. an application which is started by an [Finos FDC3 API](https://github.com/FDC3/FDC3/blob/master/src/api/interface.ts) open call. The format specified here could be used to describe applications from a range of FDC3 API implementations. 

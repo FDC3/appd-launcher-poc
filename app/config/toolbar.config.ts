@@ -15,6 +15,12 @@
  * limitations under the License.
  */
 
+/**
+ * The Toolbar uses implementations of the FDC3 API and the FINOS Interop API
+ * Add the implementations package names and specific Interop platform configurations here and they will be required
+ * and initialized in ../main.ts
+ */
+
 // Add FDC3 API Implementation package name
 const FDC3_API_IMPLEMENTATION = '';
 

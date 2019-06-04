@@ -36,6 +36,7 @@ export default class App implements AppAPI {
   public intents: Intent[];
   public manifestType: string;
   public manifest: string;
+  private timeout: number = 3000;
 
   constructor(appConfig: AppAPI) {
     if (!appConfig.appId || !appConfig.name || !appConfig.manifest || !appConfig.manifestType) {
@@ -147,7 +148,7 @@ export default class App implements AppAPI {
         const wait = (ms: number, msg?: string) => new Promise((_, reject) => setTimeout(() => reject(msg), ms));
 
         try {
-          await Promise.race([fdc3Impl.open(this.name), wait(3000)]);
+          await Promise.race([fdc3Impl.open(this.name), wait(this.timeout)]);
         } catch (error) {
           logStream.next([`Failed to open application "${this.title || this.name}". ${error.msg || error}`, 'error', 'Toolbar']);
         }

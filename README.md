@@ -4,17 +4,29 @@
 
 This Toolbar, contributed by Tick42, connects to one or more FINOS FDC3 compatible application directories that implement the FDC3 App Directory REST API https://fdc3.finos.org/appd-spec. The Toolbar will show all the defined applications, and will attempt to launch applications that are defined by a supported Manifest type.
 
-The Toolbar can also show a set of favourite application as Icons in the main Toolbar. 
+The Toolbar can also show a set of favourite applications as Icons in the main Toolbar. 
 
 The Toolbar is primarily aimed at developers working with FINOS FDC3, it provides easy access to the application definitions and to the log files to allow developers to explore the services.
 
-The Toolbar is delivered as a standalone Electron application.
+## Toolbar components 
+
+The Toolbar is separated into two main components
+
+### app 
+The app component is a standalone Electron application. It also includes wrappers for the App Directory services.
+It loads the Toolbar window with a URI that is stored in ```./toolbar-ui-angular/dist```. 
+
+### toolbar-ui-angular
+The toolbar-ui-angular component is the Toolbar window displayed by the Electron application. It is written with Angular 7. 
+By default the Electron application starts the Toolbar window in file mode.
 
 ## Getting Started
 
 ### Prerequisites
 
 You will need node.js & npm as well as a globally installed electron (npm i -g electron).
+
+The project has dependencies that require Node 8.9 or higher, together with NPM 5.5.1 or higher.
 
 ### Steps to run project
 
