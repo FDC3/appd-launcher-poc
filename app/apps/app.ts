@@ -36,7 +36,6 @@ export default class App implements AppAPI {
   public intents: Intent[];
   public manifestType: string;
   public manifest: string;
-  private timeout: number = 3000;
 
   constructor(appConfig: AppAPI) {
     if (!appConfig.appId || !appConfig.name || !appConfig.manifest || !appConfig.manifestType) {
@@ -90,7 +89,10 @@ export default class App implements AppAPI {
 
       default:
 
-        await this.handleOrgFinosFdc3DemoHost(manifestJSON);
+        errorMsg = `No FDC3 API Implementation provided. Application "${this.title || this.name}" can't be started.`;
+
+        logStream.next([errorMsg, 'error', 'Toolbar']);
+        throw new Error(errorMsg);
         break;
     }
   }
@@ -125,36 +127,6 @@ export default class App implements AppAPI {
         break;
       default:
         errorMsg = `Unknown type "${manifestJSON.type}" application "${this.title || this.name}" with manifest type "org.finos.fdc3.demo".`;
-
-        logStream.next([errorMsg, 'error', 'Toolbar']);
-        throw new Error(errorMsg);
-    }
-  }
-
-  private async handleOrgFinosFdc3DemoHost(manifestJSON: any) {
-    let errorMsg: string;
-
-    const fdc3Impl = (global as any).fdc3Impl;
-
-    if (!fdc3Impl) {
-      errorMsg = `No fdc3Impl implementation provided. Application "${this.title || this.name}" with manifest type "org.finos.fdc3.demo.host" can't be started.`;
-
-      logStream.next([errorMsg, 'error', 'Toolbar']);
-      throw new Error(errorMsg);
-    }
-
-    switch (manifestJSON.type) {
-      case 'host':
-        const wait = (ms: number, msg?: string) => new Promise((_, reject) => setTimeout(() => reject(msg), ms));
-
-        try {
-          await Promise.race([fdc3Impl.open(this.name), wait(this.timeout)]);
-        } catch (error) {
-          logStream.next([`Failed to open application "${this.title || this.name}". ${error.msg || error}`, 'error', 'Toolbar']);
-        }
-        break;
-      default:
-        errorMsg = `Unknown type "${manifestJSON.type}" application "${this.title || this.name}" with manifest type "org.finos.fdc3.demo,host".`;
 
         logStream.next([errorMsg, 'error', 'Toolbar']);
         throw new Error(errorMsg);

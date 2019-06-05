@@ -17,45 +17,9 @@
 
 import logStream from './shared';
 import { Toolbar } from './toolbar';
-import { providerConfigs, toolbarConfig } from './config';
-import ProviderConfig from './providers/types/providerConfig';
-import ProviderFactory from './providers/providerFactory';
-import InteropPlatformAPI from './types/client-api';
-import { Fdc3APIImplementation } from './types/interface';
 
-const providerFactory = new ProviderFactory();
-
-const appProviders = providerConfigs.map((providerConfig: ProviderConfig) => {
-  const provider = providerFactory.create(providerConfig);
-  logStream.next([`Will add provider "${providerConfig.name}" with URL "${providerConfig.apiUrl}"`, 'info', 'Toolbar']);
-  return provider;
-});
-
-let InteropPlatform: (interopPlatformConfig: any) => InteropPlatformAPI;
-let fdc3Impl: (interopPlatforms: InteropPlatformAPI[]) => Promise<Fdc3APIImplementation>;
-let fdc3ImplReady: Promise<Fdc3APIImplementation>;
-
-try {
-  InteropPlatform = require(toolbarConfig.FINOS_INTEROP_API_IMPLEMENTATION);
-} catch (error) {
-  logStream.next([`Failed to load ${toolbarConfig.FINOS_INTEROP_API_IMPLEMENTATION || 'FINOS Interop'} implementation.`, 'error', 'Toolbar']);
-}
-
-const interopPlatforms: InteropPlatformAPI[] = []; // https://github.com/finos-plexus/finos-plexus.github.io
-toolbarConfig.FDC3_API_PLATFORMS.forEach((fdc3APIPlatform) => {
-  // Create Interop Platform and push it to the interopPlatforms list
-  const typeSpecificInteropPlatform: InteropPlatformAPI = InteropPlatform(fdc3APIPlatform);
-  interopPlatforms.push(typeSpecificInteropPlatform);
-});
-
-try {
-  fdc3Impl = require(toolbarConfig.FDC3_API_IMPLEMENTATION);
-  fdc3ImplReady = fdc3Impl(interopPlatforms);
-} catch (error) {
-  logStream.next([`Failed to load ${toolbarConfig.FDC3_API_IMPLEMENTATION || 'FDC3 API'} implementation.`, 'error', 'Toolbar']);
-}
-
+const appProviders: any[] = [];
 const fdc3LauncherToolbar = new Toolbar();
-fdc3LauncherToolbar.start(appProviders, fdc3ImplReady);
+fdc3LauncherToolbar.start(appProviders);
 (global as any).fdc3LauncherToolbar = fdc3LauncherToolbar;
 (global as any).logStream = logStream;

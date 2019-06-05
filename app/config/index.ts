@@ -15,12 +15,8 @@
  * limitations under the License.
  */
 
-import providerConfigs from './providers.config';
-import toolbarConfig from './toolbar.config';
 import windowConfig from './window-options.config';
 
 export {
-  providerConfigs,
-  toolbarConfig,
   windowConfig,
 };

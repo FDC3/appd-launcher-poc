@@ -24,7 +24,6 @@ import { BehaviorSubject } from 'rxjs';
 import logStream from './shared';
 import RestAppProvider from './providers/rest-app-provider';
 import { writeFileSync } from 'fs';
-import { Fdc3APIImplementation } from './types/interface';
 
 export class Toolbar {
   public toolbarWindow: BrowserWindow;
@@ -32,17 +31,12 @@ export class Toolbar {
   private toolbarWindowReady: Promise<void>;
   private providers = new BehaviorSubject<AppProvider[]>([]);
 
-  public start(providers: AppProvider[], fdc3ImplReady?: Promise<Fdc3APIImplementation>) {
+  public start(providers: AppProvider[]) {
     this.startToolbarWindow();
     this.addProviders(providers);
     ipcMain.on('get-preload-path', (event: any) => {
         event.returnValue = path.join(__dirname, '../toolbar-ui-angular/preload.js');
     });
-    if (typeof fdc3ImplReady !== 'undefined') {
-      fdc3ImplReady.then((fdc3Impl) => {
-        (global as any).fdc3Impl = fdc3Impl;
-      });
-    }
   }
 
   public addProvider(provider: ProviderConfig): boolean {

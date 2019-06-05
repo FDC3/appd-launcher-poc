@@ -20,6 +20,11 @@ It loads the Toolbar window with a URI that is stored in ```./toolbar-ui-angular
 The toolbar-ui-angular component is the Toolbar window displayed by the Electron application. It is written with Angular 7. 
 By default the Electron application starts the Toolbar window in file mode.
 
+The Toolbar is currently aware of the following manifest types:
+- 'org.finos.fdc3.demo' - covers browser/exe and therefore is platform/host independent
+- 'org.finos.fdc3.demo.host' - covers platform/host specific applications
+
+
 ## Getting Started
 
 ### Prerequisites
