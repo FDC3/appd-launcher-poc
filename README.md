@@ -32,19 +32,32 @@ The project has dependencies that require Node 8.9 or higher, together with NPM 
 
 - Clone the project
 
+- run build-ui.bat
+- run build-app.bat
+- run start.bat
+
+### Steps to run project manually
+
 #### Build Toolbar Window (UI)
 
 - ```cd``` to <project's root dir>/toolbar-ui-angular
+- ```npm i```
 - ```npm run build```
 
-#### Build Electron app
+#### Install dependencies
 
-- ```cd``` to <project's root dir>
+- ```cd``` to the project's root dir
+- ```npm i```
+
+#### Run dev version
+
 - ```npm run build```
+- ```electron app-js/main.js```
 
-#### Run Toolbar
+#### Run prod version
 
-- ```npm run start```
+- ```npm run package:all```
+- Inside the release-builds folder locate the built version for your OS
 
 ## Description
 
@@ -74,7 +87,7 @@ In order to use the FDC3 Demo Toolbar, you need to have AppD services to connect
 
 ##### [org.finos.fdc3.demo](./app/apps/schemas/org.finos.fdc3.demo-manifest-schema.json)
 
-Support for starting application of manifestType `org.finos.fdc3.demo.host` is scheduled for version 1.1. This manifestType is used for applications that are started via the FDC3 API.
+Support for starting application of manifestType `org.finos.fdc3.demo.host` is scheduled for version 1.1 of the Toolbar. This can be viewed in the [FINOS Plexus Interop API examples](https://github.com/finos-plexus/finos-plexus.github.io/tree/master/demos/finos-fdc3/fdc3-toolbar) This manifestType is used for applications that are started via the FDC3 API.
 
 ##### [org.finos.fdc3.demo.host](./app/apps/schemas/org.finos.fdc3.demo.host-manifest-schema.json)
 
