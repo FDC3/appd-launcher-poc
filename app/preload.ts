@@ -18,9 +18,9 @@
 import { remote } from 'electron';
 
 /**
- * By saving these variables to the window object, the Toolbar Window is able to call methods and subscribe for events
- * in the Electron app.
- * fdc3LauncherToolbar allows to subscribe for providers and to call methods related to the providers
+ * By saving these variables to the window object, the Toolbar Window is able to start applications and log events.
+ * This is demo code and should be changed for production.
+ * fdc3LauncherToolbar allows to subscribe for providers and to start their applications.
  * logStream allows to subscribe for log stream and to push new logs
  */
 (window as any).fdc3LauncherToolbar = remote.getGlobal('fdc3LauncherToolbar');
