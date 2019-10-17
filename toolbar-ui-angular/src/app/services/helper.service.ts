@@ -1,0 +1,84 @@
+/**
+ * Copyright © 2014-2019 Tick42 OOD
+ * SPDX-License-Identifier: Apache-2.0
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Subject} from 'rxjs/index';
+import {ElectronService} from 'ngx-electron';
+
+import {IApplication, ILog, IProvider, IFdc3LauncherToolbarApplication} from '../app';
+
+@Injectable()
+export class HelperService {
+  public showSettings: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public showContent: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public appStartFail: Subject<{startApp: IApplication, message: string}> =
+    new Subject<{startApp: IApplication, message: string}>();
+  public showAppDirectoryModal: Subject<{show: boolean, provider?: IProvider}> =
+    new Subject<{show: boolean, provider?: IProvider}>();
+  public logs: BehaviorSubject<ILog[]> = new BehaviorSubject<ILog[]>([]);
+  public clearLogsFilters: Subject<boolean> = new Subject<boolean>();
+  private innerLogs: ILog[] = [];
+
+  constructor(private electronService: ElectronService) {
+  }
+
+  /**
+   * Sort array of apps alphabetically
+   * @param apps: array of apps
+   * @param key: key to sort by
+   * @returns IApplication[]: array of apps
+   */
+  public sortArrayAlphabeticallyByKey(apps: IApplication[], key: string): IApplication[] {
+    return apps.sort((a: IApplication, b: IApplication) => {
+      const nameA: string = a[key].toUpperCase();
+      const nameB: string = b[key].toUpperCase();
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+      return 0;
+    });
+  }
+
+  /**
+   * Add log to the list of displayed logs
+   * @param timestamp: timestamp from log creation
+   * @param type: 'INFO' | 'WARNING' | 'ERROR'
+   * @param origin: 'Angular' | 'Electron' | 'Toolbar'
+   * @param message: log message
+   */
+  public addLog(timestamp: number, type: string, origin: string, message: string): void {
+    this.innerLogs.unshift({timestamp, type, origin, message, show: true});
+    this.logs.next(this.innerLogs);
+  }
+
+  /**
+   * Get Fdc3 Launcher Toolbar app
+   * Converts the modified app into the originally received app from fdc3LauncherToolbar providers
+   * @param app: modified app
+   * @returns IFdc3LauncherToolbarApplication: fdc3LauncherToolbar app
+   */
+  public getFdc3LauncherToolbarApp(app: IApplication): IFdc3LauncherToolbarApplication {
+    const fdc3ToolbarApp: IApplication | IFdc3LauncherToolbarApplication = Object.assign({}, app);
+    delete (fdc3ToolbarApp as IApplication).iconPath;
+    delete (fdc3ToolbarApp as IApplication).showApp;
+    delete (fdc3ToolbarApp as IApplication).isFavourite;
+    return fdc3ToolbarApp;
+  }
+}
