@@ -15,17 +15,17 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@iamadamjowett/angular-click-outside": "^2.10.1",
-    "@types/node-fetch": "^2.1.2",
-    "angular": "^1.7.2",
-    "bootstrap.native": "^2.0.23",
-    "node-fetch": "^2.2.0",
-    "rxjs": "^6.2.2",
+    "@types/node-fetch": "^2.5.2",
+    "angular": "^1.7.8",
+    "bootstrap.native": "^2.0.27",
+    "node-fetch": "^2.6.0",
+    "rxjs": "^6.5.3",
     "typescript": "^2.9.2"
   },
   "devDependencies": {
-    "electron": "^2.0.6",
-    "electron-packager": "^12.1.1",
-    "tslint": "^5.11.0"
+    "electron": "^2.0.18",
+    "electron-packager": "^12.2.0",
+    "tslint": "^5.20.0"
   },
   "optionalDependencies": {}
 }
